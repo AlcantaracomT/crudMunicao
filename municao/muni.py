@@ -24,3 +24,7 @@ def ver_municao():
 def atualiza_municao(fabricante, nova_quantidade):
     sql = "UPDATE municao SET quantidade = %s WHERE fabricante = %s;"
     executar_comando(sql, [nova_quantidade, fabricante])
+
+def deleta_municao(codigo_lote):
+    sql = "DELETE FROM municao WHERE codigo_lote = %s;"
+    executar_comando(sql, [codigo_lote])
