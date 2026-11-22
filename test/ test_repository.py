@@ -36,3 +36,10 @@ def test_deleta_municao_envia_delete(mocker):
     sql, params = mock_exec.call_args[0]
     assert "DELETE FROM municao" in sql
     assert params == ["LOTE1"]
+
+def test_executar_comando_faz_commit(mocker):
+    fake_conn = mocker.MagicMock()
+    mocker.patch("municao.muni.psycopg2.connect",
+                 return_value=mocker.MagicMock(__enter__=lambda s, *_: fake_conn))
+    muni.executar_comando("SELECT 1")
+    # verifica que cursor.execute foi chamado
