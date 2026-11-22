@@ -20,3 +20,7 @@ def add_municao(fabricante, quantidade, codigo_lote):
 def ver_municao():
     sql = "SELECT id, fabricante, quantidade, codigo_lote FROM municao;"
     return executar_comando(sql, retornar_dados=True)
+
+def atualiza_municao(fabricante, nova_quantidade):
+    sql = "UPDATE municao SET quantidade = %s WHERE fabricante = %s;"
+    executar_comando(sql, [nova_quantidade, fabricante])

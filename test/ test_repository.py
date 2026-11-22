@@ -22,3 +22,10 @@ def test_ver_municao_retorna_lista(mocker):
     )
     linhas = muni.ver_municao()
     assert linhas == [(1, "CBC", 100, "LOTE1")]
+
+def test_atualiza_municao_envia_update(mocker):
+    mock_exec = mocker.patch("municao.muni.executar_comando")
+    muni.atualiza_municao("CBC", 50)
+    sql, params = mock_exec.call_args[0]
+    assert "UPDATE municao" in sql
+    assert params == [50, "CBC"]
