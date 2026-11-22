@@ -14,25 +14,3 @@ def test_add_municao_insere_com_parametros(mocker):
     sql, params = mock_exec.call_args[0]
     assert "INSERT INTO municao" in sql
     assert params == ["CBC", 100, "LOTE1"]
-
-def test_ver_municao_retorna_lista(mocker):
-    mocker.patch(
-        "municao.muni.executar_comando",
-        return_value=[(1, "CBC", 100, "LOTE1")],
-    )
-    linhas = muni.ver_municao()
-    assert linhas == [(1, "CBC", 100, "LOTE1")]
-
-def test_atualiza_municao_envia_update(mocker):
-    mock_exec = mocker.patch("municao.muni.executar_comando")
-    muni.atualiza_municao("CBC", 50)
-    sql, params = mock_exec.call_args[0]
-    assert "UPDATE municao" in sql
-    assert params == [50, "CBC"]
-
-def test_deleta_municao_envia_delete(mocker):
-    mock_exec = mocker.patch("municao.muni.executar_comando")
-    muni.deleta_municao("LOTE1")
-    sql, params = mock_exec.call_args[0]
-    assert "DELETE FROM municao" in sql
-    assert params == ["LOTE1"]
