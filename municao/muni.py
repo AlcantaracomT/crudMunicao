@@ -16,3 +16,7 @@ def criar_tabela():
 def add_municao(fabricante, quantidade, codigo_lote):
     sql = "INSERT INTO municao(fabricante, quantidade, codigo_lote) VALUES (%s, %s, %s);"
     executar_comando(sql, [fabricante, quantidade, codigo_lote])
+
+def ver_municao():
+    sql = "SELECT id, fabricante, quantidade, codigo_lote FROM municao;"
+    return executar_comando(sql, retornar_dados=True)
